@@ -105,7 +105,7 @@ export default function LanguageScreen() {
       return;
     }
 
-    router.replace("/(tabs)/index");
+    router.replace("/home");
   }
 
   function handleConfirmPress() {
@@ -114,7 +114,7 @@ export default function LanguageScreen() {
       language_code: selectedLanguageCode,
       language_name: selectedLanguage?.name ?? selectedLanguageCode,
     });
-    router.replace("/(tabs)/index");
+    router.replace("/home");
   }
 
   return (

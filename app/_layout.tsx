@@ -46,7 +46,7 @@ function AuthRedirects() {
     }
 
     if (isSignedIn && isAuthRoute) {
-      router.replace(selectedLanguageCode ? "/(tabs)/index" : "/language");
+      router.replace(selectedLanguageCode ? "/home" : "/language");
       return;
     }
 

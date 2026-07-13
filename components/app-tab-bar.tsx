@@ -20,7 +20,7 @@ type TabIconName = keyof typeof Feather.glyphMap;
 const TAB_ICONS: Record<string, TabIconName> = {
   "ai-teacher": "disc",
   chat: "message-circle",
-  index: "home",
+  home: "home",
   learn: "book-open",
   profile: "user",
 };

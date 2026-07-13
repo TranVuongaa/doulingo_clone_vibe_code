@@ -144,7 +144,7 @@ export function AuthScreen({ mode }: AuthScreenProps) {
 
     await setActiveSession({ session: sessionId });
     setIsVerificationVisible(false);
-    router.replace("/(tabs)/index");
+    router.replace("/home");
   }
 
   async function finalizeEmailAuth(
@@ -157,7 +157,7 @@ export function AuthScreen({ mode }: AuthScreenProps) {
     }
 
     setIsVerificationVisible(false);
-    router.replace("/(tabs)/index");
+    router.replace("/home");
   }
 
   async function handleSignUp() {
