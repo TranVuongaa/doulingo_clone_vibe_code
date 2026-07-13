@@ -8,13 +8,15 @@ import {
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { usePostHog } from "posthog-react-native";
 
 import { images } from "@/constants/images";
 
 export default function OnboardingScreen() {
+  const posthog = usePostHog();
   const insets = useSafeAreaInsets();
   const { height } = useWindowDimensions();
-  const availableHeight = height - insets.top - insets.bottom;
+  const availableHeight = height - insets.bottom;
   const scale = Math.min(1, Math.max(0.8, availableHeight / 820));
   const logoSize = 60 * scale;
   const mascotSize = 320 * scale;
@@ -25,7 +27,7 @@ export default function OnboardingScreen() {
       style={{
         paddingBottom: insets.bottom + 24 * scale,
         paddingHorizontal: 40,
-        paddingTop: insets.top + 24 * scale,
+        paddingTop: 24 * scale,
       }}
     >
       <View className="w-full max-w-[460px] flex-1 self-center">
@@ -125,6 +127,7 @@ export default function OnboardingScreen() {
           <Pressable
             className="flex-row items-center justify-center rounded-[24px] border-b-[5px] border-[#4d31db] bg-lingua-deep-purple px-8"
             style={{ height: 76 * scale }}
+            onPress={() => posthog.capture('onboarding_get_started_pressed')}
           >
             <Text
               className="font-poppins-semibold text-white"

@@ -9,6 +9,7 @@ import * as Linking from "expo-linking";
 import { Link, router } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
 import { type ReactNode, useMemo, useRef, useState } from "react";
+import { usePostHog } from "posthog-react-native";
 import {
   Image,
   KeyboardAvoidingView,
@@ -82,6 +83,7 @@ function getAuthErrorMessage(error: unknown) {
 
 export function AuthScreen({ mode }: AuthScreenProps) {
   const insets = useSafeAreaInsets();
+  const posthog = usePostHog();
   const { fetchStatus: signInFetchStatus, signIn } = useSignIn();
   const { fetchStatus: signUpFetchStatus, signUp } = useSignUp();
   const { startSSOFlow } = useSSO();
@@ -264,6 +266,12 @@ export function AuthScreen({ mode }: AuthScreenProps) {
         }
 
         await finalizeEmailAuth(() => signUp.finalize());
+
+        posthog.identify(email.trim(), {
+          $set: { email: email.trim(), signup_method: 'email' },
+          $set_once: { first_signup_date: new Date().toISOString() },
+        });
+        posthog.capture('user_signed_up', { signup_method: 'email' });
         return;
       }
 
@@ -284,6 +292,11 @@ export function AuthScreen({ mode }: AuthScreenProps) {
       }
 
       await finalizeEmailAuth(() => signIn.finalize());
+
+      posthog.identify(email.trim(), {
+        $set: { email: email.trim(), login_method: 'email' },
+      });
+      posthog.capture('user_signed_in', { login_method: 'email' });
     } catch (error) {
       setVerificationCode("");
       setAuthError(getAuthErrorMessage(error));
@@ -310,6 +323,8 @@ export function AuthScreen({ mode }: AuthScreenProps) {
       });
 
       await activateSocialSession(createdSessionId, setActive);
+
+      posthog.capture('social_auth_completed', { provider: strategy });
     } catch (error) {
       setAuthError(getAuthErrorMessage(error));
     } finally {
@@ -337,7 +352,7 @@ export function AuthScreen({ mode }: AuthScreenProps) {
           styles.content,
           {
             paddingBottom: insets.bottom + 32,
-            paddingTop: insets.top + 18,
+            paddingTop: 18,
           },
         ]}
         keyboardShouldPersistTaps="handled"

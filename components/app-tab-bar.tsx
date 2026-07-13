@@ -25,8 +25,8 @@ const TAB_ICONS: Record<string, TabIconName> = {
   profile: "user",
 };
 
-const ACTIVE_CIRCLE_SIZE = 48;
-const BAR_HORIZONTAL_PADDING = 14;
+const ACTIVE_CIRCLE_SIZE = 40;
+const BAR_HORIZONTAL_PADDING = 10;
 
 export function AppTabBar({
   descriptors,
@@ -39,10 +39,11 @@ export function AppTabBar({
 
   const activeRouteName = state.routes[state.index]?.name;
   const activeIconName: TabIconName = activeRouteName
-    ? TAB_ICONS[activeRouteName] ?? "circle"
+    ? (TAB_ICONS[activeRouteName] ?? "circle")
     : "circle";
   const barWidth = width;
-  const tabWidth = (barWidth - BAR_HORIZONTAL_PADDING * 2) / state.routes.length;
+  const tabWidth =
+    (barWidth - BAR_HORIZONTAL_PADDING * 2) / state.routes.length;
 
   useEffect(() => {
     activeIndex.value = withSpring(state.index, {
@@ -64,14 +65,21 @@ export function AppTabBar({
   }));
 
   return (
-    <View style={[styles.wrapper, { paddingBottom: Math.max(insets.bottom, 8) }]}>
-      <View className="relative h-[76px] flex-row border-t border-[#eef0f6] bg-white px-[14px] pt-[10px]">
+    <View
+      style={[styles.wrapper, { paddingBottom: Math.max(insets.bottom, 8) }]}
+    >
+      <View className="relative h-[70px] flex-row border-t border-[#eef0f6] bg-white px-3 pt-2">
         <Animated.View
-          className="absolute top-[10px] h-12 w-12 items-center justify-center rounded-full bg-lingua-deep-purple"
+          className="absolute top-2 h-11 w-11 items-center justify-center rounded-full bg-lingua-deep-purple"
           pointerEvents="none"
           style={[styles.activeCircle, circleStyle]}
         >
-          <Feather color="#FFFFFF" name={activeIconName} size={25} strokeWidth={3} />
+          <Feather
+            color="#FFFFFF"
+            name={activeIconName}
+            size={23}
+            strokeWidth={2.8}
+          />
         </Animated.View>
 
         {state.routes.map((route, index) => {
@@ -114,20 +122,20 @@ export function AppTabBar({
               onPress={handlePress}
               style={styles.tabButton}
             >
-              <View className="h-12 items-center justify-center">
+              <View className="h-11 items-center justify-center">
                 {!isFocused ? (
                   <Feather
                     color="#7E87A3"
                     name={iconName}
-                    size={26}
-                    strokeWidth={2.3}
+                    size={23}
+                    strokeWidth={2.2}
                   />
                 ) : null}
               </View>
 
               {!isFocused ? (
                 <Text
-                  className="mt-0.5 text-center font-poppins-semibold text-[11px] leading-[15px] text-[#7E87A3]"
+                  className="mt-0.5 text-center font-poppins-medium text-[10px] leading-[14px] text-[#7E87A3]"
                   numberOfLines={1}
                 >
                   {title}

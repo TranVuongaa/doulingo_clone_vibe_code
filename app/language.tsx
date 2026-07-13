@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { usePostHog } from "posthog-react-native";
 
 import { images } from "@/constants/images";
 import { languages } from "@/data/languages";
@@ -65,6 +66,7 @@ function LanguageRow({
 }
 
 export default function LanguageScreen() {
+  const posthog = usePostHog();
   const insets = useSafeAreaInsets();
   const savedLanguageCode = useLearningStore(
     (state) => state.selectedLanguageCode,
@@ -108,6 +110,10 @@ export default function LanguageScreen() {
 
   function handleConfirmPress() {
     selectLanguage(selectedLanguageCode);
+    posthog.capture('language_selected', {
+      language_code: selectedLanguageCode,
+      language_name: selectedLanguage?.name ?? selectedLanguageCode,
+    });
     router.replace("/(tabs)/index");
   }
 
@@ -118,7 +124,7 @@ export default function LanguageScreen() {
           styles.content,
           {
             paddingBottom: insets.bottom + 22,
-            paddingTop: insets.top + 16,
+            paddingTop: 16,
           },
         ]}
         keyboardShouldPersistTaps="handled"

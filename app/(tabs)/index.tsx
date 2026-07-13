@@ -2,6 +2,7 @@ import { Feather } from "@expo/vector-icons";
 import { useUser } from "@clerk/expo";
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { usePostHog } from "posthog-react-native";
 
 import { images } from "@/constants/images";
 import { getLanguageByCode, languages } from "@/data/languages";
@@ -40,6 +41,7 @@ function getFirstName(fallback: string, userName?: string | null) {
 }
 
 export default function HomeScreen() {
+  const posthog = usePostHog();
   const insets = useSafeAreaInsets();
   const { user } = useUser();
   const selectedLanguageCode = useLearningStore(
@@ -96,7 +98,7 @@ export default function HomeScreen() {
           styles.content,
           {
             paddingBottom: insets.bottom + 118,
-            paddingTop: insets.top + 18,
+            paddingTop: 18,
           },
         ]}
         showsVerticalScrollIndicator={false}
@@ -193,7 +195,16 @@ export default function HomeScreen() {
                 </Text>
               </View>
 
-              <Pressable className="h-[48px] w-[120px] items-center justify-center rounded-[14px] bg-white">
+              <Pressable
+                className="h-[48px] w-[120px] items-center justify-center rounded-[14px] bg-white"
+                onPress={() =>
+                  posthog.capture('lesson_continued', {
+                    language_code: languageCode,
+                    language_name: selectedLanguage?.name ?? languageCode,
+                    lesson_title: currentLesson?.title ?? '',
+                  })
+                }
+              >
                 <Text className="font-poppins-semibold text-[18px] leading-[24px] text-lingua-deep-purple">
                   Continue
                 </Text>
@@ -270,6 +281,12 @@ export default function HomeScreen() {
             <Pressable
               accessibilityLabel="Start AI video call"
               className="ml-4 h-[54px] w-[54px] items-center justify-center rounded-full bg-[#45c61a]"
+              onPress={() =>
+                posthog.capture('ai_video_call_started', {
+                  language_code: languageCode,
+                  language_name: selectedLanguage?.name ?? languageCode,
+                })
+              }
             >
               <Feather color="#FFFFFF" name="video" size={29} strokeWidth={3} />
             </Pressable>
