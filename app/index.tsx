@@ -1,4 +1,5 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Link } from "expo-router";
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { images } from "@/constants/images";
 
@@ -190,6 +191,17 @@ export default function Index() {
     >
       <View className="gap-4 xl:flex-row">
         <View className="flex-1 gap-4">
+          <View className="ds-card gap-4 p-6">
+            <SectionHeader title="Screens" />
+            <Link href="/onboarding" asChild>
+              <Pressable className="h-14 flex-row items-center justify-center rounded-control bg-lingua-purple px-5">
+                <Text className="font-poppins-semibold text-base text-white">
+                  Open onboarding screen
+                </Text>
+              </Pressable>
+            </Link>
+          </View>
+
           <View className="ds-card gap-7 p-6">
             <SectionHeader title="Brand" />
             <View className="flex-row flex-wrap items-center justify-center gap-6 py-4">
