@@ -200,6 +200,13 @@ export default function Index() {
                 </Text>
               </Pressable>
             </Link>
+            <Link href="/language" asChild>
+              <Pressable className="h-14 flex-row items-center justify-center rounded-control border border-border bg-white px-5">
+                <Text className="font-poppins-semibold text-base text-text-primary">
+                  Open language selection
+                </Text>
+              </Pressable>
+            </Link>
           </View>
 
           <View className="ds-card gap-7 p-6">

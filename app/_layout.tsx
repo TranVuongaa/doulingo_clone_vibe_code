@@ -35,7 +35,7 @@ function AuthRedirects() {
       return;
     }
 
-    if (isSignedIn && (isAuthRoute || isOnboardingRoute)) {
+    if (isSignedIn && isAuthRoute) {
       router.replace("/");
     }
   }, [isLoaded, isSignedIn, segments]);
