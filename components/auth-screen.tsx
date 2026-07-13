@@ -47,19 +47,19 @@ const codeLength = 6;
 const socialProviders: SocialProvider[] = [
   {
     color: "#4285F4",
-    icon: (color) => <AntDesign color={color} name="google" size={30} />,
+    icon: (color) => <AntDesign color={color} name="google" size={26} />,
     label: "Continue with Google",
     strategy: "oauth_google",
   },
   {
     color: "#1877F2",
-    icon: (color) => <FontAwesome color={color} name="facebook" size={32} />,
+    icon: (color) => <FontAwesome color={color} name="facebook" size={28} />,
     label: "Continue with Facebook",
     strategy: "oauth_facebook",
   },
   {
     color: "#07122E",
-    icon: (color) => <AntDesign color={color} name="apple" size={32} />,
+    icon: (color) => <AntDesign color={color} name="apple" size={28} />,
     label: "Continue with Apple",
     strategy: "oauth_apple",
   },
@@ -351,8 +351,8 @@ export function AuthScreen({ mode }: AuthScreenProps) {
         contentContainerStyle={[
           styles.content,
           {
-            paddingBottom: insets.bottom + 32,
-            paddingTop: 18,
+            paddingBottom: insets.bottom + 24,
+            paddingTop: 14,
           },
         ]}
         keyboardShouldPersistTaps="handled"
@@ -367,28 +367,28 @@ export function AuthScreen({ mode }: AuthScreenProps) {
             <Feather color="#0D132B" name="chevron-left" size={34} />
           </Pressable>
 
-          <View className="mt-7 gap-3">
-            <Text className="font-poppins-bold text-[29px] leading-[37px] text-text-primary">
+          <View className="mt-5 gap-2">
+            <Text className="font-poppins-bold text-[25px] leading-[32px] text-text-primary">
               {copy.title}
             </Text>
-            <Text className="font-poppins-regular text-[16px] leading-[24px] text-[#76809f]">
+            <Text className="font-poppins-regular text-[14px] leading-[21px] text-[#76809f]">
               {copy.subtitle}
             </Text>
           </View>
 
-          <View className="mt-6 h-[142px] items-center justify-end overflow-hidden">
+          <View className="mt-5 h-[124px] items-center justify-end overflow-hidden">
             <View className="absolute left-[85px] top-6">
-              <Text className="font-poppins-semibold text-[22px] leading-[26px] text-[#ff9400]">
+              <Text className="font-poppins-semibold text-[19px] leading-[23px] text-[#ff9400]">
                 ✦
               </Text>
             </View>
             <View className="absolute right-[84px] top-8">
-              <Text className="font-poppins-semibold text-[20px] leading-[25px] text-[#61a2ff]">
+              <Text className="font-poppins-semibold text-[17px] leading-[22px] text-[#61a2ff]">
                 ✦
               </Text>
             </View>
             <View className="absolute right-[100px] top-[76px]">
-              <Text className="font-poppins-semibold text-[20px] leading-[25px] text-[#ffd553]">
+              <Text className="font-poppins-semibold text-[17px] leading-[22px] text-[#ffd553]">
                 ✦
               </Text>
             </View>
@@ -399,15 +399,15 @@ export function AuthScreen({ mode }: AuthScreenProps) {
             />
           </View>
 
-          <View className="-mt-1 gap-3">
-            <View className="h-[82px] justify-center rounded-[18px] border border-border bg-white px-5">
-              <Text className="font-poppins-medium text-[14px] leading-[19px] text-[#8187a2]">
+          <View className="-mt-1 gap-2.5">
+            <View className="h-[72px] justify-center rounded-[16px] border border-border bg-white px-4">
+              <Text className="font-poppins-medium text-[12px] leading-[17px] text-[#8187a2]">
                 Email
               </Text>
               <TextInput
                 autoCapitalize="none"
                 autoComplete="email"
-                className="mt-2.5 font-poppins-regular text-[17px] leading-[24px] text-text-primary"
+                className="mt-2 font-poppins-regular text-[15px] leading-[21px] text-text-primary"
                 inputMode="email"
                 keyboardType="email-address"
                 onChangeText={(value) => {
@@ -420,15 +420,15 @@ export function AuthScreen({ mode }: AuthScreenProps) {
             </View>
 
             {isSignUp ? (
-              <View className="h-[82px] flex-row items-center rounded-[18px] border border-border bg-white px-5">
+              <View className="h-[72px] flex-row items-center rounded-[16px] border border-border bg-white px-4">
                 <View className="flex-1 justify-center">
-                  <Text className="font-poppins-medium text-[14px] leading-[19px] text-[#8187a2]">
+                  <Text className="font-poppins-medium text-[12px] leading-[17px] text-[#8187a2]">
                     Password
                   </Text>
                   <TextInput
                     autoCapitalize="none"
                     autoComplete="new-password"
-                    className="mt-2.5 font-poppins-regular text-[17px] leading-[24px] text-text-primary"
+                    className="mt-2 font-poppins-regular text-[15px] leading-[21px] text-text-primary"
                     onChangeText={(value) => {
                       setPassword(value);
                       setAuthError("");
@@ -454,35 +454,35 @@ export function AuthScreen({ mode }: AuthScreenProps) {
           {isSignUp ? <View nativeID="clerk-captcha" /> : null}
 
           <Pressable
-            className={`mt-6 h-[62px] items-center justify-center rounded-[18px] border-b-[4px] border-[#4e34de] bg-lingua-deep-purple ${isBusy ? "opacity-70" : ""}`}
+            className={`mt-5 h-[56px] items-center justify-center rounded-[16px] border-b-[3px] border-[#4e34de] bg-lingua-deep-purple ${isBusy ? "opacity-70" : ""}`}
             disabled={isBusy}
             onPress={() => {
               void handlePrimaryPress();
             }}
           >
-            <Text className="font-poppins-semibold text-[19px] leading-[25px] text-white">
+            <Text className="font-poppins-semibold text-[17px] leading-[23px] text-white">
               {isSubmitting ? "Please wait..." : copy.button}
             </Text>
           </Pressable>
 
           {authError ? (
-            <Text className="mt-3 text-center font-poppins-regular text-[14px] leading-[20px] text-error">
+            <Text className="mt-2 text-center font-poppins-regular text-[12px] leading-[18px] text-error">
               {authError}
             </Text>
           ) : null}
 
-          <View className="my-8 flex-row items-center gap-4">
+          <View className="my-5 flex-row items-center gap-2.5">
             <View className="h-px flex-1 bg-border" />
-            <Text className="font-poppins-regular text-[15px] leading-[21px] text-[#8187a2]">
+            <Text className="font-poppins-regular text-[13px] leading-[18px] text-[#8187a2]">
               or continue with
             </Text>
             <View className="h-px flex-1 bg-border" />
           </View>
 
-          <View className="gap-3">
+          <View className="gap-2.5">
             {socialProviders.map((provider) => (
               <Pressable
-                className={`h-[58px] flex-row items-center rounded-[18px] border border-border bg-white px-6 ${isBusy ? "opacity-70" : ""}`}
+                className={`h-[52px] flex-row items-center rounded-[16px] border border-border bg-white px-5 ${isBusy ? "opacity-70" : ""}`}
                 disabled={isBusy}
                 key={provider.label}
                 onPress={() => {
@@ -492,7 +492,7 @@ export function AuthScreen({ mode }: AuthScreenProps) {
                 <View className="w-11 items-center">
                   {provider.icon(provider.color)}
                 </View>
-                <Text className="flex-1 text-center font-poppins-medium text-[16px] leading-[22px] text-text-primary">
+                <Text className="flex-1 text-center font-poppins-medium text-[14px] leading-[20px] text-text-primary">
                   {provider.label}
                 </Text>
                 <View className="w-11" />
@@ -502,7 +502,7 @@ export function AuthScreen({ mode }: AuthScreenProps) {
 
           <View className="flex-1" />
 
-          <Text className="mt-16 text-center font-poppins-regular text-[15px] leading-[24px] text-[#8187a2]">
+          <Text className="mt-10 text-center font-poppins-regular text-[13px] leading-[21px] text-[#8187a2]">
             {copy.footerCopy}{" "}
             <Link href={copy.footerHref} asChild>
               <Text className="font-poppins-semibold text-lingua-deep-purple">
@@ -527,32 +527,32 @@ export function AuthScreen({ mode }: AuthScreenProps) {
             className="flex-1 bg-black/35"
             onPress={() => setIsVerificationVisible(false)}
           />
-          <View className="bg-black/35 px-6 pb-8">
-            <View className="w-full max-w-[470px] self-center rounded-[28px] bg-white px-6 py-7">
-              <Text className="text-center font-poppins-bold text-[26px] leading-[34px] text-text-primary">
+          <View className="bg-black/35 px-4 pb-5">
+            <View className="w-full max-w-[470px] self-center rounded-[24px] bg-white px-4 py-5">
+              <Text className="text-center font-poppins-bold text-[22px] leading-[29px] text-text-primary">
                 {copy.modalTitle}
               </Text>
-              <Text className="mt-3 text-center font-poppins-regular text-[16px] leading-[25px] text-[#76809f]">
+              <Text className="mt-2 text-center font-poppins-regular text-[14px] leading-[22px] text-[#76809f]">
                 You have received an email. Enter the verification code to
                 continue.
               </Text>
 
               {authError ? (
-                <Text className="mt-3 text-center font-poppins-regular text-[14px] leading-[20px] text-error">
+                <Text className="mt-2 text-center font-poppins-regular text-[12px] leading-[18px] text-error">
                   {authError}
                 </Text>
               ) : null}
 
               <Pressable
-                className="mt-7 flex-row justify-center gap-2"
+                className="mt-5 flex-row justify-center gap-1.5"
                 onPress={() => inputRef.current?.focus()}
               >
                 {Array.from({ length: codeLength }).map((_, index) => (
                   <View
-                    className="h-[58px] w-[46px] items-center justify-center rounded-[16px] border border-border bg-surface"
+                    className="h-[52px] w-[40px] items-center justify-center rounded-[14px] border border-border bg-surface"
                     key={index}
                   >
-                    <Text className="font-poppins-semibold text-[24px] leading-[30px] text-text-primary">
+                    <Text className="font-poppins-semibold text-[20px] leading-[26px] text-text-primary">
                       {verificationCode[index] ?? ""}
                     </Text>
                   </View>
@@ -580,7 +580,7 @@ export function AuthScreen({ mode }: AuthScreenProps) {
 const styles = StyleSheet.create({
   content: {
     flexGrow: 1,
-    paddingHorizontal: 32,
+    paddingHorizontal: 20,
   },
   hiddenCodeInput: {
     height: 1,
@@ -589,8 +589,8 @@ const styles = StyleSheet.create({
     width: 1,
   },
   mascot: {
-    height: 184,
-    width: 220,
+    height: 160,
+    width: 192,
   },
   modalRoot: {
     flex: 1,

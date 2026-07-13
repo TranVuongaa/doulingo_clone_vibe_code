@@ -97,15 +97,15 @@ export default function HomeScreen() {
         contentContainerStyle={[
           styles.content,
           {
-            paddingBottom: insets.bottom + 118,
-            paddingTop: 18,
+            paddingBottom: insets.bottom + 100,
+            paddingTop: 14,
           },
         ]}
         showsVerticalScrollIndicator={false}
       >
         <View className="w-full max-w-[430px] self-center">
-          <View className="h-[52px] flex-row items-center">
-            <View className="h-[42px] w-[42px] overflow-hidden rounded-full border border-[#fff0df] bg-[#fff8ef]">
+          <View className="h-[46px] flex-row items-center">
+            <View className="h-[38px] w-[38px] overflow-hidden rounded-full border border-[#fff0df] bg-[#fff8ef]">
               <Image
                 className="h-full w-full"
                 resizeMode="cover"
@@ -114,55 +114,55 @@ export default function HomeScreen() {
             </View>
 
             <Text
-              className="ml-4 flex-1 font-poppins-semibold text-[19px] leading-[25px] text-text-primary"
+              className="ml-3 flex-1 font-poppins-semibold text-[16px] leading-[22px] text-text-primary"
               numberOfLines={1}
             >
               {greeting}, {learnerName}!
             </Text>
 
-            <View className="mr-6 flex-row items-center gap-2">
+            <View className="mr-4 flex-row items-center gap-1.5">
               <Image
-                className="h-[32px] w-[32px]"
+                className="h-[28px] w-[28px]"
                 resizeMode="contain"
                 source={images.streakFire}
               />
-              <Text className="font-poppins-semibold text-[18px] leading-[24px] text-[#323b5f]">
+              <Text className="font-poppins-semibold text-[16px] leading-[22px] text-[#323b5f]">
                 12
               </Text>
             </View>
 
             <Pressable
               accessibilityLabel="Notifications"
-              className="h-11 w-9 items-end justify-center"
+              className="h-10 w-8 items-end justify-center"
             >
-              <Feather color="#0D132B" name="bell" size={27} strokeWidth={2.4} />
+              <Feather color="#0D132B" name="bell" size={24} strokeWidth={2.4} />
             </Pressable>
           </View>
 
-          <View className="mt-[26px] h-[136px] overflow-hidden rounded-[20px] bg-[#fff8ef] px-6 py-5">
+          <View className="mt-[20px] h-[120px] overflow-hidden rounded-[18px] bg-[#fff8ef] px-5 py-4">
             <View className="flex-row">
               <View className="flex-1">
-                <Text className="font-poppins-medium text-[17px] leading-[23px] text-[#323b5f]">
+                <Text className="font-poppins-medium text-[15px] leading-[20px] text-[#323b5f]">
                   Daily goal
                 </Text>
-                <View className="mt-4 flex-row items-end">
-                  <Text className="font-poppins-bold text-[32px] leading-[38px] text-text-primary">
+                <View className="mt-3 flex-row items-end">
+                  <Text className="font-poppins-bold text-[27px] leading-[33px] text-text-primary">
                     {xpToday}
                   </Text>
-                  <Text className="pb-1 pl-2 font-poppins-medium text-[18px] leading-[24px] text-[#7f8aa8]">
+                  <Text className="pb-0.5 pl-1.5 font-poppins-medium text-[15px] leading-[20px] text-[#7f8aa8]">
                     / {DAILY_GOAL_XP} XP
                   </Text>
                 </View>
               </View>
 
               <Image
-                className="h-[92px] w-[116px]"
+                className="h-[80px] w-[102px]"
                 resizeMode="contain"
                 source={images.treasure}
               />
             </View>
 
-            <View className="mt-3 h-[8px] overflow-hidden rounded-full bg-[#ffe4c4]">
+            <View className="mt-2.5 h-[7px] overflow-hidden rounded-full bg-[#ffe4c4]">
               <View
                 className="h-full rounded-full bg-[#ff7a16]"
                 style={{ width: `${progressPercentage}%` }}
@@ -170,7 +170,7 @@ export default function HomeScreen() {
             </View>
           </View>
 
-          <View className="mt-[26px] h-[184px] overflow-hidden rounded-[20px] bg-lingua-deep-purple">
+          <View className="mt-[20px] h-[164px] overflow-hidden rounded-[18px] bg-lingua-deep-purple">
             <View className="absolute bottom-0 right-0 h-[148px] w-[238px] opacity-95">
               <Image
                 className="h-full w-full"
@@ -179,24 +179,24 @@ export default function HomeScreen() {
               />
             </View>
             <View className="absolute bottom-0 left-[170px] h-[118px] w-[128px] rounded-tl-[60px] bg-[#4534d7] opacity-45" />
-            <View className="h-full justify-between px-6 py-6">
+            <View className="h-full justify-between px-5 py-5">
               <View>
-                <Text className="font-poppins-medium text-[18px] leading-[24px] text-white">
+                <Text className="font-poppins-medium text-[15px] leading-[20px] text-white">
                   Continue learning
                 </Text>
                 <Text
-                  className="mt-3 font-poppins-semibold text-[29px] leading-[35px] text-white"
+                  className="mt-2 font-poppins-semibold text-[25px] leading-[31px] text-white"
                   numberOfLines={1}
                 >
                   {selectedLanguage.name}
                 </Text>
-                <Text className="mt-1 font-poppins-medium text-[20px] leading-[27px] text-white">
+                <Text className="mt-0.5 font-poppins-medium text-[17px] leading-[23px] text-white">
                   {unitLabel}
                 </Text>
               </View>
 
               <Pressable
-                className="h-[48px] w-[120px] items-center justify-center rounded-[14px] bg-white"
+                className="h-[44px] w-[108px] items-center justify-center rounded-[12px] bg-white"
                 onPress={() =>
                   posthog.capture('lesson_continued', {
                     language_code: languageCode,
@@ -205,39 +205,39 @@ export default function HomeScreen() {
                   })
                 }
               >
-                <Text className="font-poppins-semibold text-[18px] leading-[24px] text-lingua-deep-purple">
+                <Text className="font-poppins-semibold text-[15px] leading-[21px] text-lingua-deep-purple">
                   Continue
                 </Text>
               </Pressable>
             </View>
           </View>
 
-          <View className="mt-[30px] flex-row items-center justify-between">
-            <Text className="font-poppins-semibold text-[20px] leading-[27px] text-text-primary">
+          <View className="mt-[24px] flex-row items-center justify-between">
+            <Text className="font-poppins-semibold text-[17px] leading-[23px] text-text-primary">
               {"Today's plan"}
             </Text>
             <Pressable accessibilityRole="button" className="px-1 py-1">
-              <Text className="font-poppins-semibold text-[18px] leading-[24px] text-lingua-deep-purple">
+              <Text className="font-poppins-semibold text-[15px] leading-[21px] text-lingua-deep-purple">
                 View all
               </Text>
             </Pressable>
           </View>
 
-          <View className="mt-[22px] gap-[22px]">
+          <View className="mt-[16px] gap-[16px]">
             {planItems.map((item) => (
               <View className="flex-row items-center" key={item.title}>
                 <View
-                  className={`h-[50px] w-[50px] items-center justify-center rounded-[11px] ${item.accentClassName}`}
+                  className={`h-[44px] w-[44px] items-center justify-center rounded-[10px] ${item.accentClassName}`}
                 >
-                  <Feather color="#FFFFFF" name={item.icon} size={28} strokeWidth={2.5} />
+                  <Feather color="#FFFFFF" name={item.icon} size={24} strokeWidth={2.5} />
                 </View>
 
-                <View className="ml-5 flex-1">
-                  <Text className="font-poppins-semibold text-[17px] leading-[23px] text-text-primary">
+                <View className="ml-4 flex-1">
+                  <Text className="font-poppins-semibold text-[15px] leading-[20px] text-text-primary">
                     {item.title}
                   </Text>
                   <Text
-                    className="mt-1 font-poppins-regular text-[16px] leading-[21px] text-[#79839f]"
+                    className="mt-0.5 font-poppins-regular text-[14px] leading-[19px] text-[#79839f]"
                     numberOfLines={1}
                   >
                     {item.subtitle}
@@ -245,42 +245,42 @@ export default function HomeScreen() {
                 </View>
 
                 <View
-                  className={`h-[28px] w-[28px] items-center justify-center rounded-full ${
+                  className={`h-[24px] w-[24px] items-center justify-center rounded-full ${
                     item.isComplete
                       ? "bg-lingua-deep-purple"
                       : "border-2 border-[#8b94ad] bg-white"
                   }`}
                 >
                   {item.isComplete ? (
-                    <Feather color="#FFFFFF" name="check" size={19} strokeWidth={3} />
+                    <Feather color="#FFFFFF" name="check" size={16} strokeWidth={3} />
                   ) : null}
                 </View>
               </View>
             ))}
           </View>
 
-          <View className="mt-[36px] h-[126px] flex-row items-center overflow-hidden rounded-[18px] bg-[#f5fde9] px-5">
+          <View className="mt-[28px] h-[112px] flex-row items-center overflow-hidden rounded-[16px] bg-[#f5fde9] px-4">
             <View className="flex-1">
-              <Text className="font-poppins-medium text-[16px] leading-[22px] text-[#6e7895]">
+              <Text className="font-poppins-medium text-[14px] leading-[19px] text-[#6e7895]">
                 Next up
               </Text>
-              <Text className="mt-2 font-poppins-semibold text-[21px] leading-[28px] text-text-primary">
+              <Text className="mt-1.5 font-poppins-semibold text-[18px] leading-[24px] text-text-primary">
                 AI Video Call
               </Text>
-              <Text className="mt-1 font-poppins-regular text-[16px] leading-[22px] text-[#59637f]">
+              <Text className="mt-0.5 font-poppins-regular text-[14px] leading-[19px] text-[#59637f]">
                 Practice speaking
               </Text>
             </View>
 
             <Image
-              className="h-[96px] w-[96px] rounded-full"
+              className="h-[82px] w-[82px] rounded-full"
               resizeMode="cover"
               source={{ uri: images.teacherPortrait }}
             />
 
             <Pressable
               accessibilityLabel="Start AI video call"
-              className="ml-4 h-[54px] w-[54px] items-center justify-center rounded-full bg-[#45c61a]"
+              className="ml-3 h-[48px] w-[48px] items-center justify-center rounded-full bg-[#45c61a]"
               onPress={() =>
                 posthog.capture('ai_video_call_started', {
                   language_code: languageCode,
@@ -288,7 +288,7 @@ export default function HomeScreen() {
                 })
               }
             >
-              <Feather color="#FFFFFF" name="video" size={29} strokeWidth={3} />
+              <Feather color="#FFFFFF" name="video" size={25} strokeWidth={3} />
             </Pressable>
           </View>
         </View>
@@ -300,6 +300,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   content: {
     flexGrow: 1,
-    paddingHorizontal: 28,
+    paddingHorizontal: 22,
   },
 });

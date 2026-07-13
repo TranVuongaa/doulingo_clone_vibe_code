@@ -25,9 +25,9 @@ export default function OnboardingScreen() {
     <View
       className="flex-1 bg-background"
       style={{
-        paddingBottom: insets.bottom + 24 * scale,
-        paddingHorizontal: 40,
-        paddingTop: 24 * scale,
+        paddingBottom: insets.bottom + 18 * scale,
+        paddingHorizontal: 24,
+        paddingTop: 18 * scale,
       }}
     >
       <View className="w-full max-w-[460px] flex-1 self-center">
@@ -39,16 +39,16 @@ export default function OnboardingScreen() {
           />
           <Text
             className="font-poppins-bold text-text-primary"
-            style={{ fontSize: 42 * scale, lineHeight: 52 * scale }}
+            style={{ fontSize: 36 * scale, lineHeight: 44 * scale }}
           >
             muolingo
           </Text>
         </View>
 
-        <View style={{ marginTop: 56 * scale }}>
+        <View style={{ marginTop: 36 * scale }}>
           <Text
             className="font-poppins-bold text-text-primary"
-            style={{ fontSize: 36 * scale, lineHeight: 50 * scale }}
+            style={{ fontSize: 30 * scale, lineHeight: 40 * scale }}
           >
             Your AI language{"\n"}
             <Text className="text-lingua-deep-purple">teacher.</Text>
@@ -56,9 +56,9 @@ export default function OnboardingScreen() {
           <Text
             className="font-poppins-regular text-[#63677d]"
             style={{
-              fontSize: 18 * scale,
-              lineHeight: 34 * scale,
-              marginTop: 18 * scale,
+              fontSize: 15 * scale,
+              lineHeight: 26 * scale,
+              marginTop: 12 * scale,
             }}
           >
             Real conversations, personalized{"\n"}
@@ -68,25 +68,25 @@ export default function OnboardingScreen() {
 
         <View
           className="relative w-full"
-          style={{ height: 360 * scale, marginTop: 24 * scale }}
+          style={{ height: 340 * scale, marginTop: 18 * scale }}
         >
           <View
-            className="absolute left-0 rounded-[20px] bg-[#eef7ff] px-6 py-4"
+            className="absolute left-0 rounded-[18px] bg-[#eef7ff] px-5 py-3"
             style={{ top: 34 * scale }}
           >
             <Text
               className="font-poppins-medium text-text-primary"
-              style={{ fontSize: 25 * scale, lineHeight: 31 * scale }}
+              style={{ fontSize: 21 * scale, lineHeight: 27 * scale }}
             >
               Hello!
             </Text>
             <View style={[styles.bubbleTail, styles.blueTail]} />
           </View>
 
-          <View className="absolute right-5 top-0 rounded-[20px] bg-[#f6f4ff] px-6 py-4">
+          <View className="absolute right-5 top-0 rounded-[18px] bg-[#f6f4ff] px-5 py-3">
             <Text
               className="font-poppins-medium italic text-lingua-deep-purple"
-              style={{ fontSize: 25 * scale, lineHeight: 31 * scale }}
+              style={{ fontSize: 21 * scale, lineHeight: 27 * scale }}
             >
               ¡Hola!
             </Text>
@@ -94,12 +94,12 @@ export default function OnboardingScreen() {
           </View>
 
           <View
-            className="absolute right-0 rounded-[20px] bg-[#fff2ed] px-6 py-4"
+            className="absolute right-0 rounded-[18px] bg-[#fff2ed] px-5 py-3"
             style={{ top: 112 * scale }}
           >
             <Text
               className="font-poppins-medium text-[#ff3f2f]"
-              style={{ fontSize: 25 * scale, lineHeight: 31 * scale }}
+              style={{ fontSize: 21 * scale, lineHeight: 27 * scale }}
             >
               你好!
             </Text>
@@ -125,19 +125,19 @@ export default function OnboardingScreen() {
 
         <Link href="/sign-up" asChild>
           <Pressable
-            className="flex-row items-center justify-center rounded-[24px] border-b-[5px] border-[#4d31db] bg-lingua-deep-purple px-8"
-            style={{ height: 76 * scale }}
+            className="flex-row items-center justify-center rounded-[22px] border-b-[4px] border-[#4d31db] bg-lingua-deep-purple px-5"
+            style={{ height: 64 * scale }}
             onPress={() => posthog.capture('onboarding_get_started_pressed')}
           >
             <Text
               className="font-poppins-semibold text-white"
-              style={{ fontSize: 22 * scale, lineHeight: 28 * scale }}
+              style={{ fontSize: 18 * scale, lineHeight: 24 * scale }}
             >
               Get Started
             </Text>
             <Text
-              className="absolute right-9 font-poppins-regular text-white"
-              style={{ fontSize: 48 * scale, lineHeight: 52 * scale }}
+              className="absolute right-7 font-poppins-regular text-white"
+              style={{ fontSize: 40 * scale, lineHeight: 44 * scale }}
             >
               ›
             </Text>

@@ -30,36 +30,36 @@ function LanguageRow({
   return (
     <Pressable
       accessibilityRole="button"
-      className={`h-[88px] flex-row items-center rounded-[22px] bg-white px-4 ${
+      className={`h-[76px] flex-row items-center rounded-[18px] bg-white px-3.5 ${
         isSelected
           ? "border-2 border-lingua-purple bg-[#fbfaff]"
           : "border border-[#f2f3f8]"
       }`}
       onPress={onPress}
     >
-      <View className="h-[52px] w-[52px] items-center justify-center overflow-hidden rounded-full border border-[#eef0f6] bg-white">
+      <View className="h-[46px] w-[46px] items-center justify-center overflow-hidden rounded-full border border-[#eef0f6] bg-white">
         <Image
           source={{ uri: language.flag }}
-          className="h-[52px] w-[52px]"
+          className="h-[46px] w-[46px]"
           resizeMode="cover"
         />
       </View>
 
-      <View className="ml-5 flex-1">
-        <Text className="font-poppins-semibold text-[20px] leading-[26px] text-text-primary">
+      <View className="ml-4 flex-1">
+        <Text className="font-poppins-semibold text-[17px] leading-[23px] text-text-primary">
           {language.name}
         </Text>
-        <Text className="mt-1 font-poppins-regular text-[15px] leading-[20px] text-[#6f7897]">
+        <Text className="mt-0.5 font-poppins-regular text-[13px] leading-[18px] text-[#6f7897]">
           {language.learnerCountLabel}
         </Text>
       </View>
 
       {isSelected ? (
-        <View className="h-[38px] w-[38px] items-center justify-center rounded-full border-b-[3px] border-[#4e34de] bg-lingua-deep-purple">
-          <Feather color="#FFFFFF" name="check" size={24} strokeWidth={3} />
+        <View className="h-[34px] w-[34px] items-center justify-center rounded-full border-b-[2px] border-[#4e34de] bg-lingua-deep-purple">
+          <Feather color="#FFFFFF" name="check" size={21} strokeWidth={3} />
         </View>
       ) : (
-        <Feather color="#626b89" name="chevron-right" size={30} />
+        <Feather color="#626b89" name="chevron-right" size={26} />
       )}
     </Pressable>
   );
@@ -123,8 +123,8 @@ export default function LanguageScreen() {
         contentContainerStyle={[
           styles.content,
           {
-            paddingBottom: insets.bottom + 22,
-            paddingTop: 16,
+            paddingBottom: insets.bottom + 18,
+            paddingTop: 12,
           },
         ]}
         keyboardShouldPersistTaps="handled"
@@ -134,18 +134,18 @@ export default function LanguageScreen() {
           <View className="h-14 flex-row items-center">
             <Pressable
               accessibilityLabel="Go back"
-              className="h-12 w-12 items-start justify-center"
+              className="h-11 w-11 items-start justify-center"
               onPress={handleBackPress}
             >
-              <Feather color="#0D132B" name="chevron-left" size={36} />
+              <Feather color="#0D132B" name="chevron-left" size={31} />
             </Pressable>
-            <Text className="flex-1 pr-12 text-center font-poppins-semibold text-[24px] leading-[32px] text-text-primary">
+            <Text className="flex-1 pr-10 text-center font-poppins-semibold text-[21px] leading-[28px] text-text-primary">
               Choose a language
             </Text>
           </View>
 
-          <View className="mt-7 h-[68px] flex-row items-center rounded-[32px] border border-[#e9ebf2] bg-[#fbfbfd] px-5">
-            <Feather color="#53617e" name="search" size={29} />
+          <View className="mt-5 h-[58px] flex-row items-center rounded-[28px] border border-[#e9ebf2] bg-[#fbfbfd] px-4">
+            <Feather color="#53617e" name="search" size={25} />
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
@@ -157,11 +157,11 @@ export default function LanguageScreen() {
             />
           </View>
 
-          <Text className="mt-9 font-poppins-semibold text-[20px] leading-[26px] text-text-primary">
+          <Text className="mt-6 font-poppins-semibold text-[17px] leading-[23px] text-text-primary">
             Popular
           </Text>
 
-          <View className="mt-6 gap-1">
+          <View className="mt-4 gap-1">
             {visibleLanguages.map((language) => (
               <LanguageRow
                 isSelected={language.code === selectedLanguageCode}
@@ -173,16 +173,16 @@ export default function LanguageScreen() {
           </View>
 
           <Pressable
-            className="mt-6 h-[78px] flex-row items-center justify-center gap-3 rounded-[24px] border-b-[4px] border-[#4e34de] bg-lingua-deep-purple px-6"
+            className="mt-5 h-[66px] flex-row items-center justify-center gap-2 rounded-[20px] border-b-[3px] border-[#4e34de] bg-lingua-deep-purple px-5"
             onPress={handleConfirmPress}
           >
-            <Feather color="#FFFFFF" name="check-circle" size={27} />
-            <Text className="font-poppins-semibold text-[19px] leading-[25px] text-white">
+            <Feather color="#FFFFFF" name="check-circle" size={23} />
+            <Text className="font-poppins-semibold text-[16px] leading-[22px] text-white">
               Continue with {selectedLanguage.name}
             </Text>
           </Pressable>
 
-          <View className="mt-5 h-[184px] overflow-hidden">
+          <View className="mt-4 h-[160px] overflow-hidden">
             <Image
               source={images.earth}
               className="absolute bottom-[-8px] h-[210px] w-full"
@@ -198,15 +198,15 @@ export default function LanguageScreen() {
 const styles = StyleSheet.create({
   content: {
     flexGrow: 1,
-    paddingHorizontal: 28,
+    paddingHorizontal: 22,
   },
   searchInput: {
     color: "#0D132B",
     flex: 1,
     fontFamily: "Poppins-Regular",
-    fontSize: 19,
-    lineHeight: 25,
-    marginLeft: 16,
+    fontSize: 16,
+    lineHeight: 22,
+    marginLeft: 12,
     padding: 0,
   },
 });

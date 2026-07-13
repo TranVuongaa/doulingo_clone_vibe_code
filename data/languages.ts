@@ -12,7 +12,7 @@ export const languages: LearningLanguage[] = [
     accentColor: "#FF6B35",
     learnerCountLabel: "28.4M learners",
     beginnerLevel: "Beginner A1",
-    estimatedLessons: 3,
+    estimatedLessons: 6,
   },
   {
     code: "fr",
@@ -24,7 +24,7 @@ export const languages: LearningLanguage[] = [
     accentColor: "#4D8BFF",
     learnerCountLabel: "19.4M learners",
     beginnerLevel: "Beginner A1",
-    estimatedLessons: 3,
+    estimatedLessons: 6,
   },
   {
     code: "ja",
@@ -36,7 +36,7 @@ export const languages: LearningLanguage[] = [
     accentColor: "#FF4D6D",
     learnerCountLabel: "12.7M learners",
     beginnerLevel: "Beginner A1",
-    estimatedLessons: 3,
+    estimatedLessons: 6,
   },
   // {
   //   code: "ko",
@@ -61,7 +61,7 @@ export const languages: LearningLanguage[] = [
     accentColor: "#FFC800",
     learnerCountLabel: "8.1M learners",
     beginnerLevel: "Beginner A1",
-    estimatedLessons: 0,
+    estimatedLessons: 6,
   },
   // {
   //   code: "zh",

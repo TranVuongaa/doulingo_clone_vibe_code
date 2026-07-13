@@ -3,43 +3,43 @@ import { fontFamilies } from "./fonts";
 export const typography = {
   h1: {
     fontFamily: fontFamilies.bold,
-    fontSize: 32,
-    lineHeight: 38.4,
+    fontSize: 28,
+    lineHeight: 34,
   },
   h2: {
     fontFamily: fontFamilies.semiBold,
-    fontSize: 24,
-    lineHeight: 31.2,
+    fontSize: 21,
+    lineHeight: 27,
   },
   h3: {
     fontFamily: fontFamilies.semiBold,
-    fontSize: 20,
-    lineHeight: 26,
+    fontSize: 18,
+    lineHeight: 23,
   },
   h4: {
     fontFamily: fontFamilies.medium,
-    fontSize: 16,
-    lineHeight: 22.4,
+    fontSize: 15,
+    lineHeight: 20,
   },
   bodyLarge: {
     fontFamily: fontFamilies.regular,
-    fontSize: 16,
-    lineHeight: 25.6,
+    fontSize: 15,
+    lineHeight: 22,
   },
   bodyMedium: {
     fontFamily: fontFamilies.regular,
-    fontSize: 14,
-    lineHeight: 22.4,
+    fontSize: 13,
+    lineHeight: 20,
   },
   bodySmall: {
     fontFamily: fontFamilies.regular,
-    fontSize: 13,
-    lineHeight: 20.8,
+    fontSize: 12,
+    lineHeight: 18,
   },
   caption: {
     fontFamily: fontFamilies.regular,
-    fontSize: 11,
-    lineHeight: 15.4,
+    fontSize: 10,
+    lineHeight: 14,
   },
 } as const;
 

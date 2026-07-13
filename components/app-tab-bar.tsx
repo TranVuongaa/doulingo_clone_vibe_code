@@ -25,8 +25,8 @@ const TAB_ICONS: Record<string, TabIconName> = {
   profile: "user",
 };
 
-const ACTIVE_CIRCLE_SIZE = 40;
-const BAR_HORIZONTAL_PADDING = 10;
+const ACTIVE_CIRCLE_SIZE = 36;
+const BAR_HORIZONTAL_PADDING = 8;
 
 export function AppTabBar({
   descriptors,
@@ -66,18 +66,18 @@ export function AppTabBar({
 
   return (
     <View
-      style={[styles.wrapper, { paddingBottom: Math.max(insets.bottom, 8) }]}
+      style={[styles.wrapper, { paddingBottom: Math.max(insets.bottom, 6) }]}
     >
-      <View className="relative h-[70px] flex-row border-t border-[#eef0f6] bg-white px-3 pt-2">
+      <View className="relative h-[64px] flex-row border-t border-[#eef0f6] bg-white px-2 pt-1.5">
         <Animated.View
-          className="absolute top-2 h-11 w-11 items-center justify-center rounded-full bg-lingua-deep-purple"
+          className="absolute top-1.5 h-9 w-9 items-center justify-center rounded-full bg-lingua-deep-purple"
           pointerEvents="none"
           style={[styles.activeCircle, circleStyle]}
         >
           <Feather
             color="#FFFFFF"
             name={activeIconName}
-            size={23}
+            size={21}
             strokeWidth={2.8}
           />
         </Animated.View>
@@ -122,12 +122,12 @@ export function AppTabBar({
               onPress={handlePress}
               style={styles.tabButton}
             >
-              <View className="h-11 items-center justify-center">
+              <View className="h-10 items-center justify-center">
                 {!isFocused ? (
                   <Feather
                     color="#7E87A3"
                     name={iconName}
-                    size={23}
+                    size={21}
                     strokeWidth={2.2}
                   />
                 ) : null}
@@ -135,7 +135,7 @@ export function AppTabBar({
 
               {!isFocused ? (
                 <Text
-                  className="mt-0.5 text-center font-poppins-medium text-[10px] leading-[14px] text-[#7E87A3]"
+                  className="mt-0.5 text-center font-poppins-medium text-[9px] leading-[12px] text-[#7E87A3]"
                   numberOfLines={1}
                 >
                   {title}
