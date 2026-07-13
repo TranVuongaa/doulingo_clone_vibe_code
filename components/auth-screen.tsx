@@ -142,7 +142,7 @@ export function AuthScreen({ mode }: AuthScreenProps) {
 
     await setActiveSession({ session: sessionId });
     setIsVerificationVisible(false);
-    router.replace("/");
+    router.replace("/(tabs)/index");
   }
 
   async function finalizeEmailAuth(
@@ -155,7 +155,7 @@ export function AuthScreen({ mode }: AuthScreenProps) {
     }
 
     setIsVerificationVisible(false);
-    router.replace("/");
+    router.replace("/(tabs)/index");
   }
 
   async function handleSignUp() {
@@ -435,6 +435,8 @@ export function AuthScreen({ mode }: AuthScreenProps) {
               </View>
             ) : null}
           </View>
+
+          {isSignUp ? <View nativeID="clerk-captcha" /> : null}
 
           <Pressable
             className={`mt-6 h-[62px] items-center justify-center rounded-[18px] border-b-[4px] border-[#4e34de] bg-lingua-deep-purple ${isBusy ? "opacity-70" : ""}`}

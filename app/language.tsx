@@ -1,5 +1,5 @@
 import { Feather } from "@expo/vector-icons";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Image,
   Pressable,
@@ -14,6 +14,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { images } from "@/constants/images";
 import { languages } from "@/data/languages";
+import { useLearningStore } from "@/store/use-learning-store";
 import type { LanguageCode, LearningLanguage } from "@/types/learning";
 
 function LanguageRow({
@@ -65,13 +66,23 @@ function LanguageRow({
 
 export default function LanguageScreen() {
   const insets = useSafeAreaInsets();
+  const savedLanguageCode = useLearningStore(
+    (state) => state.selectedLanguageCode,
+  );
+  const selectLanguage = useLearningStore((state) => state.selectLanguage);
   const [query, setQuery] = useState("");
   const [selectedLanguageCode, setSelectedLanguageCode] =
-    useState<LanguageCode>("es");
+    useState<LanguageCode>(savedLanguageCode ?? "es");
 
   const selectedLanguage =
     languages.find((language) => language.code === selectedLanguageCode) ??
     languages[0];
+
+  useEffect(() => {
+    if (savedLanguageCode) {
+      setSelectedLanguageCode(savedLanguageCode);
+    }
+  }, [savedLanguageCode]);
 
   const visibleLanguages = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -92,11 +103,12 @@ export default function LanguageScreen() {
       return;
     }
 
-    router.replace("/");
+    router.replace("/(tabs)/index");
   }
 
   function handleConfirmPress() {
-    router.replace("/");
+    selectLanguage(selectedLanguageCode);
+    router.replace("/(tabs)/index");
   }
 
   return (

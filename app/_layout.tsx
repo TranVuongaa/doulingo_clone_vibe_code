@@ -6,6 +6,7 @@ import { Stack, router, useSegments } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 
+import { useLearningStore } from "@/store/use-learning-store";
 import { colors, fontAssets } from "@/theme";
 import "../global.css";
 
@@ -20,14 +21,19 @@ if (!publishableKey) {
 function AuthRedirects() {
   const { isLoaded, isSignedIn } = useAuth();
   const segments = useSegments();
+  const hasHydrated = useLearningStore((state) => state.hasHydrated);
+  const selectedLanguageCode = useLearningStore(
+    (state) => state.selectedLanguageCode,
+  );
 
   useEffect(() => {
-    if (!isLoaded) {
+    if (!isLoaded || !hasHydrated) {
       return;
     }
 
     const firstSegment = segments[0];
     const isAuthRoute = firstSegment === "(auth)";
+    const isLanguageRoute = firstSegment === "language";
     const isOnboardingRoute = firstSegment === "onboarding";
 
     if (!isSignedIn && !isAuthRoute && !isOnboardingRoute) {
@@ -36,9 +42,16 @@ function AuthRedirects() {
     }
 
     if (isSignedIn && isAuthRoute) {
-      router.replace("/");
+      router.replace(selectedLanguageCode ? "/(tabs)/index" : "/language");
+      return;
     }
-  }, [isLoaded, isSignedIn, segments]);
+
+    if (isSignedIn && !selectedLanguageCode && !isLanguageRoute) {
+      router.replace("/language");
+      return;
+    }
+
+  }, [hasHydrated, isLoaded, isSignedIn, segments, selectedLanguageCode]);
 
   return null;
 }
