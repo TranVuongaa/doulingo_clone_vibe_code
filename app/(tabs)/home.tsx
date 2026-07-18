@@ -1,6 +1,14 @@
 import { Feather } from "@expo/vector-icons";
 import { useUser } from "@clerk/expo";
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { usePostHog } from "posthog-react-native";
 
@@ -43,6 +51,7 @@ function getFirstName(fallback: string, userName?: string | null) {
 export default function HomeScreen() {
   const posthog = usePostHog();
   const insets = useSafeAreaInsets();
+  const { width: windowWidth } = useWindowDimensions();
   const { user } = useUser();
   const selectedLanguageCode = useLearningStore(
     (state) => state.selectedLanguageCode,
@@ -66,6 +75,11 @@ export default function HomeScreen() {
     currentUnit?.order ?? 1
   }`;
   const vocabularyCount = currentLesson?.vocabulary.length ?? 0;
+  const contentWidth = Math.min(Math.max(windowWidth - 44, 0), 430);
+  const imageScale = Math.min(Math.max(contentWidth / 386, 0.78), 1);
+  const treasureWidth = 102 * imageScale;
+  const palaceWidth = 238 * imageScale;
+  const teacherPortraitSize = 82 * imageScale;
 
   const planItems: PlanItem[] = [
     {
@@ -156,7 +170,10 @@ export default function HomeScreen() {
               </View>
 
               <Image
-                className="h-[80px] w-[102px]"
+                style={{
+                  height: 80 * imageScale,
+                  width: treasureWidth,
+                }}
                 resizeMode="contain"
                 source={images.treasure}
               />
@@ -171,7 +188,13 @@ export default function HomeScreen() {
           </View>
 
           <View className="mt-[20px] h-[164px] overflow-hidden rounded-[18px] bg-lingua-deep-purple">
-            <View className="absolute bottom-0 right-0 h-[148px] w-[238px] opacity-95">
+            <View
+              className="absolute bottom-0 right-0 opacity-95"
+              style={{
+                height: 148 * imageScale,
+                width: palaceWidth,
+              }}
+            >
               <Image
                 className="h-full w-full"
                 resizeMode="contain"
@@ -273,9 +296,13 @@ export default function HomeScreen() {
             </View>
 
             <Image
-              className="h-[82px] w-[82px] rounded-full"
+              className="rounded-full"
               resizeMode="cover"
               source={{ uri: images.teacherPortrait }}
+              style={{
+                height: teacherPortraitSize,
+                width: teacherPortraitSize,
+              }}
             />
 
             <Pressable

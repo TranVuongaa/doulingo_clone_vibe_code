@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  useWindowDimensions,
   View,
   type ImageSourcePropType,
 } from "react-native";
@@ -81,6 +82,7 @@ function getLessonStatus(
 
 export default function LearnScreen() {
   const insets = useSafeAreaInsets();
+  const { width: windowWidth } = useWindowDimensions();
   const selectedLanguageCode = useLearningStore(
     (state) => state.selectedLanguageCode,
   );
@@ -123,6 +125,9 @@ export default function LearnScreen() {
     ? Math.max(selectedLesson.order - 1, 0)
     : 0;
   const unitTitle = unit?.title ?? `${selectedLanguage.name} basics`;
+  const contentWidth = Math.min(windowWidth, 430);
+  const imageScale = Math.min(Math.max(contentWidth / 430, 0.74), 1);
+  const heroHeight = 268 * imageScale;
 
   function handleBackPress() {
     if (router.canGoBack()) {
@@ -178,7 +183,10 @@ export default function LearnScreen() {
             </Pressable>
           </View>
 
-          <View className="h-[268px] overflow-hidden bg-[#eaf6ff]">
+          <View
+            className="overflow-hidden bg-[#eaf6ff]"
+            style={{ height: heroHeight }}
+          >
             <Image
               className="h-full w-full"
               resizeMode="cover"
@@ -189,14 +197,26 @@ export default function LearnScreen() {
             <View className="absolute right-[-58px] top-[132px] h-[172px] w-[172px] rounded-full bg-[#93d85a] opacity-80" />
 
             <Image
-              className="absolute bottom-[-22px] left-[90px] h-[190px] w-[190px]"
+              className="absolute"
               resizeMode="contain"
               source={images.mascotLogo}
+              style={{
+                bottom: -22 * imageScale,
+                height: 190 * imageScale,
+                left: contentWidth * 0.21,
+                width: 190 * imageScale,
+              }}
             />
             <Image
-              className="absolute bottom-[-12px] right-[-12px] h-[150px] w-[150px]"
+              className="absolute"
               resizeMode="contain"
               source={getCardArtwork(selectedLesson ?? lessons[0])}
+              style={{
+                bottom: -12 * imageScale,
+                height: 150 * imageScale,
+                right: -12 * imageScale,
+                width: 150 * imageScale,
+              }}
             />
           </View>
 
@@ -228,7 +248,13 @@ export default function LearnScreen() {
                   artworkSource={getCardArtwork(lesson)}
                   key={lesson.id}
                   lessonNumber={lesson.order}
-                  onPress={() => setSelectedLessonId(lesson.id)}
+                  onPress={() => {
+                    setSelectedLessonId(lesson.id);
+                    router.push({
+                      pathname: "/lesson/[id]",
+                      params: { id: lesson.id },
+                    });
+                  }}
                   progressLabel={
                     status === "in-progress"
                       ? "In progress"
@@ -253,14 +279,11 @@ const styles = StyleSheet.create({
   segmentedControl: {
     backgroundColor: "#FFFFFF",
     borderRadius: 16,
+    boxShadow: "0 12px 26px rgba(78, 90, 128, 0.12)",
     flexDirection: "row",
     height: 70,
     marginHorizontal: 14,
     marginTop: -46,
     overflow: "hidden",
-    shadowColor: "#4E5A80",
-    shadowOffset: { height: 12, width: 0 },
-    shadowOpacity: 0.12,
-    shadowRadius: 26,
   },
 });

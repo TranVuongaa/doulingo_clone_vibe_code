@@ -12,6 +12,18 @@ config.resolver.resolveRequest = (context, moduleName, platform) => {
     `${path.sep}@clerk${path.sep}expo${path.sep}dist${path.sep}`,
   );
 
+  // Zustand's ESM middleware build contains `import.meta.env`. Metro's web
+  // development bundle is loaded as a classic script, so that syntax prevents
+  // the app from hydrating and leaves a blank screen. The CommonJS build has
+  // the same public API without `import.meta`.
+  if (platform === "web" && normalizedModuleName === "zustand/middleware") {
+    return context.resolveRequest(
+      context,
+      path.join(__dirname, "node_modules", "zustand", "middleware.js"),
+      platform,
+    );
+  }
+
   if (
     platform === "android" &&
     isClerkPackageFile &&

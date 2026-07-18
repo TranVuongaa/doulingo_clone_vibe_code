@@ -1,3 +1,4 @@
+import audioTeacherStage from "@/assets/images/audio-teacher-stage.png";
 import earth from "@/assets/images/earth.png";
 import mascotAuth from "@/assets/images/mascot-auth.png";
 import mascotLogo from "@/assets/images/moscot-logo.png";
@@ -7,6 +8,7 @@ import streakFire from "@/assets/images/streak-fire.png";
 import treasure from "@/assets/images/treasure.png";
 
 export const images = {
+  audioTeacherStage,
   earth,
   lessonScenes: {
     cafe:
