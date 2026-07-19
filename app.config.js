@@ -10,10 +10,10 @@ export default {
     newArchEnabled: true,
     ios: {
       supportsTablet: true,
-      bundleIdentifier: "com.jsmastery.duolingo-clone",
+      bundleIdentifier: "com.gai01.duolingoclone",
     },
     android: {
-      package: "com.jsmastery.duolingoclone",
+      package: "com.gai01.duolingoclone",
       adaptiveIcon: {
         backgroundColor: "#E6F4FE",
         foregroundImage: "./assets/images/android-icon-foreground.png",

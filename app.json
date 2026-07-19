@@ -9,11 +9,11 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "bundleIdentifier": "com.anonymous.doulingoclonevibecode",
+      "bundleIdentifier": "com.gai01.duolingoclone",
       "supportsTablet": true
     },
     "android": {
-      "package": "com.anonymous.doulingoclonevibecode",
+      "package": "com.gai01.duolingoclone",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",

@@ -16,10 +16,6 @@ function requiredEnvironmentVariable(value: string | undefined, name: string) {
   return value;
 }
 
-function safeCallIdPart(value: string) {
-  return value.replace(/[^a-zA-Z0-9_-]/g, "-").slice(0, 80);
-}
-
 export async function POST(request: Request) {
   try {
     const clerkClient = createClerkClient({
@@ -66,7 +62,9 @@ export async function POST(request: Request) {
     }
 
     const callType = "default" as const;
-    const callId = `lesson-${safeCallIdPart(lesson.id)}-${safeCallIdPart(userId)}-${crypto.randomUUID()}`;
+    // Stream call IDs may contain at most 64 characters. Lesson and user
+    // details are stored in the call data, so a UUID is enough for uniqueness.
+    const callId = `lesson-${crypto.randomUUID()}`;
     const streamClient = new StreamClient(
       requiredEnvironmentVariable(process.env.STREAM_API_KEY, "STREAM_API_KEY"),
       requiredEnvironmentVariable(
@@ -93,6 +91,13 @@ export async function POST(request: Request) {
           video: {
             camera_default_on: false,
             enabled: false,
+            // Stream validates target resolution whenever a video override is
+            // present, even when video is disabled for this audio-only call.
+            target_resolution: {
+              bitrate: 5_000_000,
+              height: 1440,
+              width: 2560,
+            },
           },
         },
       },
