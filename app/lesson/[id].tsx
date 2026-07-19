@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+// eslint-disable-next-line import/no-unresolved
+import { LessonAudioCall } from "@/components/lesson-audio-call";
 import { images } from "@/constants/images";
 import { getLanguageByCode, languages } from "@/data/languages";
 import { getLessonById, getLessonsByLanguage } from "@/data/lessons";
@@ -32,7 +34,6 @@ export default function AudioLessonScreen() {
   const selectedLanguageCode = useLearningStore(
     (state) => state.selectedLanguageCode,
   );
-  const [isMicOn, setIsMicOn] = useState(true);
   const [showSubtitles, setShowSubtitles] = useState(true);
 
   const lesson = useMemo(() => {
@@ -97,7 +98,7 @@ export default function AudioLessonScreen() {
                   className="font-poppins-regular text-[14px] leading-[20px] text-[#68718e]"
                   numberOfLines={1}
                 >
-                  {language.name} · Online
+                  {language.name} • Audio lesson
                 </Text>
               </View>
             </View>
@@ -155,22 +156,14 @@ export default function AudioLessonScreen() {
             </ImageBackground>
           </View>
 
-          <View className="flex-row justify-between px-7 pb-5 pt-5">
-            <LessonControl disabled icon="video-off" label="Preview" />
-            <LessonControl
-              active={isMicOn}
-              icon={isMicOn ? "mic" : "mic-off"}
-              label="Mic"
-              onPress={() => setIsMicOn((current) => !current)}
-            />
-            <LessonControl
-              active={showSubtitles}
-              icon="type"
-              label="Subtitles"
-              onPress={() => setShowSubtitles((current) => !current)}
-            />
-            <LessonControl danger icon="phone-off" label="End Call" onPress={leaveLesson} />
-          </View>
+          <LessonAudioCall
+            lesson={lesson}
+            onLeave={leaveLesson}
+            onSubtitlesChange={() =>
+              setShowSubtitles((current) => !current)
+            }
+            showSubtitles={showSubtitles}
+          />
 
           <View className="mx-4 rounded-[22px] bg-white px-3 py-5" style={styles.feedbackCard}>
             <View className="flex-row">
@@ -227,51 +220,6 @@ export default function AudioLessonScreen() {
   );
 }
 
-type LessonControlProps = {
-  active?: boolean;
-  danger?: boolean;
-  disabled?: boolean;
-  icon: FeatherIconName;
-  label: string;
-  onPress?: () => void;
-};
-
-function LessonControl({
-  active = false,
-  danger = false,
-  disabled = false,
-  icon,
-  label,
-  onPress,
-}: LessonControlProps) {
-  return (
-    <Pressable
-      accessibilityLabel={label}
-      accessibilityRole="button"
-      accessibilityState={{ disabled, selected: active }}
-      disabled={disabled}
-      className="w-[70px] items-center"
-      onPress={onPress}
-      style={({ pressed }) => ({ opacity: disabled ? 0.45 : pressed ? 0.75 : 1 })}
-    >
-      <View
-        className={`h-[58px] w-[58px] items-center justify-center rounded-full ${danger ? "bg-[#ff3b42]" : active ? "bg-[#eeeaff]" : "bg-white"}`}
-        style={danger ? styles.endButton : styles.controlButton}
-      >
-        <Feather
-          color={danger ? "#ffffff" : active ? "#6346f5" : "#101832"}
-          name={icon}
-          size={25}
-          strokeWidth={2.4}
-        />
-      </View>
-      <Text className="mt-2 text-center font-poppins-medium text-[11px] leading-[15px] text-[#6f7894]">
-        {label}
-      </Text>
-    </Pressable>
-  );
-}
-
 function FeedbackMetric({
   color,
   label,
@@ -296,12 +244,6 @@ function FeedbackMetric({
 }
 
 const styles = StyleSheet.create({
-  controlButton: {
-    boxShadow: "0 4px 10px rgba(26, 36, 64, 0.10)",
-  },
-  endButton: {
-    boxShadow: "0 4px 10px rgba(255, 59, 66, 0.28)",
-  },
   feedbackCard: {
     boxShadow: "0 8px 22px rgba(61, 72, 104, 0.08)",
   },

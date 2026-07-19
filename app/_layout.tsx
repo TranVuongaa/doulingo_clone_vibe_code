@@ -5,6 +5,7 @@ import { useFonts } from "expo-font";
 import { Stack, router, useSegments, usePathname, useGlobalSearchParams } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { PostHogProvider } from "posthog-react-native";
@@ -12,6 +13,9 @@ import { PostHogProvider } from "posthog-react-native";
 import { useLearningStore } from "@/store/use-learning-store";
 import { colors, fontAssets } from "@/theme";
 import { posthog } from "@/lib/posthog";
+// Platform files keep native WebRTC out of the API-route server bundle.
+// eslint-disable-next-line import/no-unresolved
+import { StreamVideoProvider } from "@/components/stream-video-provider";
 import "../global.css";
 
 void SplashScreen.preventAutoHideAsync();
@@ -102,25 +106,32 @@ export default function RootLayout() {
           maxElementsCaptured: 20,
         }}
       >
-        <SafeAreaProvider>
-          <SafeAreaView edges={["top"]} style={styles.safeArea}>
-            <ScreenTracker />
-            <AuthRedirects />
-            <Stack
-              screenOptions={{
-                contentStyle: { backgroundColor: colors.neutral.surface },
-                headerShown: false,
-              }}
-            />
-            <StatusBar backgroundColor={colors.neutral.background} style="dark" />
-          </SafeAreaView>
-        </SafeAreaProvider>
+        <GestureHandlerRootView style={styles.root}>
+          <SafeAreaProvider>
+            <StreamVideoProvider>
+              <SafeAreaView edges={["top"]} style={styles.safeArea}>
+                <ScreenTracker />
+                <AuthRedirects />
+                <Stack
+                  screenOptions={{
+                    contentStyle: { backgroundColor: colors.neutral.surface },
+                    headerShown: false,
+                  }}
+                />
+                <StatusBar backgroundColor={colors.neutral.background} style="dark" />
+              </SafeAreaView>
+            </StreamVideoProvider>
+          </SafeAreaProvider>
+        </GestureHandlerRootView>
       </PostHogProvider>
     </ClerkProvider>
   );
 }
 
 const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
   safeArea: {
     backgroundColor: colors.neutral.background,
     flex: 1,
